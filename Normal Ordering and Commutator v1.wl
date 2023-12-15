@@ -7,9 +7,6 @@
 BeginPackage["normalOrderingAndCommutator`"]
 
 
-Names["normalOrderingAndCommutator`"]
-
-
 (* ::Chapter:: *)
 (*\:5b9a\:4e49*)
 
@@ -18,13 +15,11 @@ Names["normalOrderingAndCommutator`"]
 (*\:57fa\:672c\:5b9a\:4e49*)
 
 
-(* ::Input::Initialization:: *)
 a::usage="a\:662f\:6e6e\:706d(annihilation)\:7b97\:7b26\:ff0c\!\(\*SuperscriptBox[\(a\), \(\[Dagger]\)]\)\:662f\:4ea7\:751f\:7b97\:7b26\:ff0ca[k]\:662f\:7b2ck\:4e2a\:6a21\:5f0f\:7684\:6e6e\:706d\:7b97\:7b26";
 a=op;
-SuperDagger[a[x_]]=a[-x];
+SuperDagger[a[x_]]:=a[-x];
 
 
-(* ::Input::Initialization:: *)
 Power[x_op,n_]/;n>1^:=NonCommutativeMultiply@@Table[x,n](*\:5728\:8f93\:5165\:4e2d\:53ef\:4ee5\:4f7f\:7528\:7b97\:7b26\:7684\:5e42\:6b21*)
 Unprotect[Power];
 Power[x_,n_]/;(n>1&&MemberQ[{x},op,\[Infinity],Heads->True]):=NonCommutativeMultiply@@Table[x,n]
@@ -32,14 +27,23 @@ Protect[Power];
 Unprotect[NonCommutativeMultiply];
 
 
+(*op::usage="\:7b97\:7b26\:7684\:5185\:90e8\:5f62\:5f0f"*)
+com
+(*com::usage="\:5bf9\:6613\:5b50"*)
+col::usage="\:5c06\:76f8\:540c\:7b97\:7b26\:7684\:8fde\:4e58\:53d8\:6210\:5e42\:6b21\:5f62\:5f0f"
+sim::usage="\:5316\:7b80"
+dis::usage="\:7f8e\:5316\:6700\:7ec8\:7684\:5c55\:793a\:7ed3\:679c\:ff0c\:53ea\:5728\:5f97\:5230\:6700\:7ec8\:8868\:8fbe\:5f0f\:540e\:4f7f\:7528"
+ord::usage="\:5bf9\:7b97\:7b26\:8fdb\:884c\:6b63\:89c4\:6392\:5e8f"
+srt::usage="\:4f7f\:5f97\:4e0d\:540c\:6a21\:5f0f\:7684\:7b97\:7b26\:4ece\:5c0f\:5230\:5927\:8fdb\:884c\:6392\:5e8f"
+SuperDagger::usage="\:5171\:8f6d\:8f6c\:7f6e"
+NonCommutativeMultiply::usage="\:5b9a\:5236\:4e86\:4e00\:4e9b\:975e\:4ea4\:6362\:4e58\:6cd5\:7684\:7ebf\:6027\:6027\:548c\:5206\:914d\:7387\:7b49\:989d\:5916\:6027\:8d28"
+
+
 (* ::Subsubsection:: *)
 (*\:5bf9\:6613\:5b50*)
 
 
-Begin["`Private`"] 
-
-
-com::usage="\:5bf9\:6613\:5b50"
+Begin["`Private`"] (*\:4e3a\:4ec0\:4e48\:8981\:52a0\:8fd9\:4e2a\:554a*)
 
 
 com[a[x_],a[y_]]/;OrderedQ[{x,y}]:=-KroneckerDelta[-x,y](*\:5b9a\:4e49\:6700\:57fa\:7840\:7684\:5bf9\:6613\:5173\:7cfb*)
@@ -61,7 +65,6 @@ com[Times[x:Except[_NonCommutativeMultiply],y_NonCommutativeMultiply],z_]:=x com
 com[z_,Times[x:Except[_NonCommutativeMultiply],y_NonCommutativeMultiply]]:=x com[z,y]
 
 
-(* ::Input::Initialization:: *)
 com[x_,y_]/;MatrixQ[x]&&MatrixQ[y]&&Dimensions[x]==Dimensions[y]:=Block[{d},d=Dimensions[x][[1]];Table[Sum[x[[i,j]]**y[[j,k]]-y[[i,j]]**x[[j,k]],{j,d}],{i,d},{k,d}]]
 
 
@@ -90,10 +93,9 @@ Protect[NonCommutativeMultiply];
 sim[p_]:=p/.NonCommutativeMultiply[x_]:>x;(*\:7b2c\:4e8c\:4e2a\:89c4\:5219\:7684\:4f5c\:7528\:662f\:5c06\:591a\:4e2a\:7b97\:7b26\:7684\:4e58\:79ef\:5c55\:793a\:4e3a\:5e42\:6b21*)
 
 
-dis[p_]:=p//.{op[x_]:>TraditionalForm[Subsuperscript["a",ToString[Abs[x]],ToString[If[x>0,"",\[Dagger]]]]],NonCommutativeMultiply[x__]:>Row[{x}]} ;(*\:5c06\:975e\:4ea4\:6362\:4e58\:6cd5\:91cc\:9762\:7684\:5143\:7d20\:4ee5\:884c\:7684\:5f62\:5f0f\:5c55\:793a\:ff0c\:5e76\:4e14\:5c06op\:66ff\:6362\:4e3a\:53ef\:8bfb\:6027\:597d\:7684\:5f62\:5f0f*)
+dis[p_]:=p//.{op[x_]:>TraditionalForm[Subsuperscript["a",ToString[Abs[x]],ToString[If[x>0,"","\[Dagger]"]]]],NonCommutativeMultiply[x__]:>Row[{x}]} ;(*\:5c06\:975e\:4ea4\:6362\:4e58\:6cd5\:91cc\:9762\:7684\:5143\:7d20\:4ee5\:884c\:7684\:5f62\:5f0f\:5c55\:793a\:ff0c\:5e76\:4e14\:5c06op\:66ff\:6362\:4e3a\:53ef\:8bfb\:6027\:597d\:7684\:5f62\:5f0f*)
 
 
-(* ::Input::Initialization:: *)
 col[p_]:=p//.HoldPattern[z___**x__op]/;SameQ@@((Part[#,1]&/@{x})):>z**Superscript[op[{x}[[1,1]]],If[Length[{x}]>1,Length[{x}]," "]]//.HoldPattern[x__op**y___]/;SameQ@@((Part[#,1]&/@{x})&&Length[{x}]>1):>Superscript[op[{x}[[1,1]]],Length[{x}]]**y//sim;
 
 
@@ -125,7 +127,13 @@ srt[x_op] := x(*\:5199\:4e00\:4e2a\:65b0\:7684\:51fd\:6570\:6765\:89e3\:51b3\:8f
 (*(*\:8fd9\:4e2a\:53ef\:80fd\:662f\:6548\:7387\:5f88\:4f4e\:7684\:5199\:6cd5\:ff0c\:5316\:7b80\:65b9\:5411\:4e0d\:660e\:786e\:ff1f\:6709\:592a\:591a\:4e0d\:5fc5\:8981\:7684\:6b65\:9aa4\:ff1f*)*)
 
 
+Remove[x,n]
+
+
 End[]; 
+
+
+Protect @@ Names["normalOrderingAndCommutator`*"];
 
 
 EndPackage[];
