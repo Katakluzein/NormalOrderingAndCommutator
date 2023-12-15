@@ -7,6 +7,9 @@
 BeginPackage["normalOrderingAndCommutator`"]
 
 
+Names["normalOrderingAndCommutator`"]
+
+
 (* ::Chapter:: *)
 (*\:5b9a\:4e49*)
 
@@ -31,6 +34,9 @@ Unprotect[NonCommutativeMultiply];
 
 (* ::Subsubsection:: *)
 (*\:5bf9\:6613\:5b50*)
+
+
+Begin["`Private`"] 
 
 
 com::usage="\:5bf9\:6613\:5b50"
@@ -119,4 +125,7 @@ srt[x_op] := x(*\:5199\:4e00\:4e2a\:65b0\:7684\:51fd\:6570\:6765\:89e3\:51b3\:8f
 (*(*\:8fd9\:4e2a\:53ef\:80fd\:662f\:6548\:7387\:5f88\:4f4e\:7684\:5199\:6cd5\:ff0c\:5316\:7b80\:65b9\:5411\:4e0d\:660e\:786e\:ff1f\:6709\:592a\:591a\:4e0d\:5fc5\:8981\:7684\:6b65\:9aa4\:ff1f*)*)
 
 
-EndPackage[]
+End[]; 
+
+
+EndPackage[];
