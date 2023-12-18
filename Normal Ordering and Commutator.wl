@@ -87,6 +87,21 @@ Protect[NonCommutativeMultiply];
 
 
 (* ::Subsubsection:: *)
+(*\:5171\:8f6d\:8f6c\:7f6e*)
+
+
+SuperDagger[((f_)[x__])]/;Not[f===op]:=SuperDagger[#]&/@f@@Reverse[{x}](*\:8ba9dagger\:7a7f\:900f\:6240\:6709\:7684\:51fd\:6570\:5934\:ff0c\:9664\:4e86op*)
+
+
+(* ::Input:: *)
+(*(*((f_)[x__])^\[Dagger]/;Not[f===op]&&MemberQ[Attributes[f],Orderless]:=#^\[Dagger]&/@f[x](*\:52a0\:4e0a\:5224\:65ad\:ff0c\:5982\:679c\:6709orderless\:5c31\:4e0d\:7528\:6267\:884creverse*)*)
+(*((f_)[x__])^\[Dagger]/;Not[f===op]&&Not[MemberQ[Attributes[f],Orderless]]:=#^\[Dagger]&/@f@@Reverse[{x}]*)*)
+
+
+SuperDagger[x_]/;NumberQ[x]:=x
+
+
+(* ::Subsubsection:: *)
 (*\:5316\:7b80\:4e0e\:5c55\:793a\:8868\:8fbe\:5f0f*)
 
 
