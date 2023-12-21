@@ -91,7 +91,7 @@ com[x_,y_]/;MatrixQ[x]&&MatrixQ[y]&&Dimensions[x]==Dimensions[y]:=Block[{d},d=Di
 
 (* ::Code:: *)
 (*acm[a_**b_,c_]:=a**acm[b,c]+acm[a,c]**b-2a**c**b*)
-(*acm[a_,b_**c_]:=b**acm[a,c]+acm[a,b]**c-2a**c**b*)
+(*acm[a_,b_**c_]:=b**acm[a,c]+acm[a,b]**c-2b**a**c*)
 (*acm[a:Except[__NonCommutativeMultiply],b:Except[__NonCommutativeMultiply]]/;!OrderedQ[{a[[1]],b[[1]]}]:=acm[b,a](*\:8fd4\:56de\:7279\:5b9a\:987a\:5e8f\:7684\:5bf9\:6613\:5b50\:ff0c\:907f\:514d\:9677\:5165\:65e0\:9650\:5faa\:73af*)(*\:6839\:636e\:7b2c\:4e00\:4e2a\:6570\:5b57\:5224\:65ad\:662f\:5426\:6709\:6b63\:786e\:7684\:987a\:5e8f*)*)
 (*acm[NonCommutativeMultiply[a_,b_,r__],c_]:=a**acm[NonCommutativeMultiply[b,r],c]+NonCommutativeMultiply[acm[a,c],b,r]*)
 (*(*acm[a:Except[_NonCommutativeMultiply],b_NonCommutativeMultiply]:=-acm[b,a]*)*)
