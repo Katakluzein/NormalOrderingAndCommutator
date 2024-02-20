@@ -122,7 +122,7 @@ NonCommutativeMultiply[Times[c:Except[_op],b_op],a_]:=c NonCommutativeMultiply[b
 (*\:5f53x\:7684\:6df1\:5ea6\:8db3\:591f\:6d45\:ff0c(\:4e0d\:786e\:5b9a\:662f\:5426\:5fc5\:8981)\:4e14\:4e0d\:662f\:6240\:6709\:7684\:51fd\:6570\:5934\:90fd\:662fop\:65f6\:ff0c\:5c06\:51fd\:6570\:5934\:4e0d\:662fop\:7684\:5143\:7d20\:53d8\:4e3a\:666e\:901a\:4e58\:6cd5\:4e58\:8d77\:6765 *)
 (*NonCommutativeMultiply[x_,y_]/;(!MemberQ[{x},op,{-1},Heads->True]||!MemberQ[{y},op,{-1},Heads->True]):=x y;*)(*\:8fd9\:662f\:6307\:6570\:589e\:957f\:7684\:590d\:6742\:5ea6*)
 (*NonCommutativeMultiply[x__]/;Length[{x}]>1&&!MemberQ[{x},op,{-1},Heads->True]:=Times[x];*)
-NonCommutativeMultiply[x__]/;Length[{x}]==2&&(!MemberQ[{x}[[1]],op,{-1},Heads->True]||!MemberQ[{x}[[2]],op,{-1},Heads->True]):=Times[x]
+NonCommutativeMultiply[x__]/;Length[{x}]==2&&(!MemberQ[{x}[[1]],op,{-1},Heads->True]||!MemberQ[{x}[[2]],op,{-1},Heads->True]):=Times[x](*\:8fd9\:662f\:672a\:5f15\:5165cex\:7684\:5199\:6cd5*)
 Protect[NonCommutativeMultiply];
 
 
@@ -208,10 +208,10 @@ srt[x_op] := x(*\:5199\:4e00\:4e2a\:65b0\:7684\:51fd\:6570\:6765\:89e3\:51b3\:8f
 Remove[x,n]
 
 
-End[]; 
+End[]; (*\:7ed3\:675fnormalOrderingAndCommutator`Private*)
 
 
 Protect @@ Names["normalOrderingAndCommutator`*"];
 
 
-EndPackage[];
+EndPackage[];(*\:56de\:5230\:5b83\:7684\:6587\:4ef6\:7684\:4e0a\:4e0b\:6587*)
